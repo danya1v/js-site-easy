@@ -12,11 +12,16 @@ const changeModalState = (state) => {
    checkNumInputs('#width')   
    checkNumInputs('#height')   
       
-   windowForm.forEach((item, i) => {
-      item.addEventListener('click', () => {
-         state.form = i;
-      })
-   });
+   function bindActionToElems (event, elem, prop) {
+      elem.forEach((item, i) => {
+         item.addEventListener(event, () => {
+            state[prop] = i;
+            console.log(state)
+         });
+      });
+   }
+   bindActionToElems('click', windowForm, 'form');
+ 
 };
 
 export default changeModalState;

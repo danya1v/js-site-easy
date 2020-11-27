@@ -1,16 +1,16 @@
-import checkNumInputs from './checkNumInputs'
+import checkNumInputs from './checkNumInputs';
 
-const forms = () => {
-   const form = document.querySelectorAll('form'),
-        inputs = document.querySelectorAll('input');    
-       
-        checkNumInputs(input[name="user_phone"]);
+const forms = (state) => {
+    const form = document.querySelectorAll('form'),
+          inputs = document.querySelectorAll('input');
 
-        const message = {
-            loading: 'Загрузка...',
-            success: 'Спасибо! Скоро мы с Вами свяжемся',
-            failure: 'Что-то пошло не так'
-        };
+    checkNumInputs('input[name="user_phone"]');
+    
+    const message = {
+        loading: 'Загрузка...',
+        success: 'Спасибо! Скоро мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
+    };
 
         const postData = async (url, data) => {
             document.querySelector('.status').textContent = message.loading;
