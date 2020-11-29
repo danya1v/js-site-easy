@@ -32,27 +32,32 @@ const forms = (state) => {
         form.forEach(item => {
             item.addEventListener('submit', (e) => {
                 e.preventDefault();
-
+    
                 let statusMessage = document.createElement('div');
                 statusMessage.classList.add('status');
                 item.appendChild(statusMessage);
-
+    
                 const formData = new FormData(item);
-
+                if (item.getAttribute('data-calc') === "end") {
+                    for (let key in state) {
+                        formData.append(key, state[key]);
+                    }
+                }
+    
                 postData('assets/server.php', formData)
                     .then(res => {
                         console.log(res);
-                        statusMessage.textContent = message.success
+                        statusMessage.textContent = message.success;
                     })
-                    .catch( () =>  statusMessage.textContent = message.failure)
+                    .catch(() => statusMessage.textContent = message.failure)
                     .finally(() => {
                         clearInputs();
                         setTimeout(() => {
                             statusMessage.remove();
-                        }, 3000);
-                    })
-                })
-        })
+                        }, 5000);
+                    });
+            });
+        });
 };
 
 export default forms;
